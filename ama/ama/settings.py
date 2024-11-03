@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-
+from datetime import timedelta
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -29,7 +29,6 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -37,19 +36,55 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users',  # Include your user application
+    'rest_framework',
+    'corsheaders',  # if you are using django-cors-headers
+    'django_filters',  # if you are using django-filter
+    'rest_framework.authtoken',  # if you are using rest_framework.authtoken
+    'rest_framework_simplejwt.token_blacklist',
+    'transfer_predictions',
+    'django.contrib.sites',  # Required for django-allauth
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
 ]
 
+SITE_ID = 1  # Make sure this is included
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
+}
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  # if you are using django-cors-headers
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'allauth.account.middleware.AccountMiddleware',  # Add this line
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
 ROOT_URLCONF = 'ama.urls'
+# Autorise uniquement les requêtes provenant du frontend (localhost:3000 pour React)
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]
+
+# Permet d'envoyer des cookies d'authentification ou des tokens dans les requêtes
+CORS_ALLOW_CREDENTIALS = True
 
 TEMPLATES = [
     {
@@ -68,15 +103,21 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'ama.wsgi.application'
+# settings.py
+AUTH_USER_MODEL = 'users.User'  # Remplacez 'app_name' par le nom de l'application où se trouve votre modèle User
 
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
+#database 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "Foot_Predict",
+        "USER": "postgres",
+        "PASSWORD": "1937",
+        "HOST": "localhost",
+        "PORT": "5432",
     }
 }
 
