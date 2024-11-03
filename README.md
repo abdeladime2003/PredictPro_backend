@@ -15,6 +15,7 @@ AMA is a web application designed for predicting transfer prices and match resul
 
 - **Frontend**: React, TypeScript, Tailwind CSS
 - **Backend**: Django, Django REST Framework
+- **Machine_Learning** : Linearregression , xgboost , Neurol_Network
 - **Database**: PostgreSQL
 - **Version Control**: Git, GitHub
 
