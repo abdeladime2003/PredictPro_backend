@@ -45,6 +45,10 @@ To set up the project locally, follow these steps:
      ```bash
      python manage.py runserver
      ```
+   - Frontend
+     For those who want to access the frontend of this project, please visit the following repository and follow the instructions:
+     [Frontend Repository](https://github.com/abdeladime2003/Frontend)
+
    - For the frontend, navigate to the frontend directory and run:
      ```bash
      npm start
