@@ -25,8 +25,8 @@ To set up the project locally, follow these steps:
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/yourusername/ama.git
-   cd ama
+   git clone https://github.com/yourusername/ama.git](https://github.com/abdeladime2003/Backend_foot.git
+   cd Backend_foot
    ```
 
 2. **Set Up Virtual Environment** (optional but recommended):
@@ -66,9 +66,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 For any inquiries or feedback, please reach out to the project owners:
 
-- **Abdeladime**: [your email]
-- **Amine**: [your email]
-- **Mouad**: [your email]
+- **Abdeladime**: [abdeladimebenali2003@gmail.com]
 
 ---
 
