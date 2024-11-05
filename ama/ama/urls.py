@@ -9,5 +9,6 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),  # URL pour rafraîchir le token
     path('transfer-predictions/', include('transfer_predictions.urls')),  # Inclure les URLs de l'application transfer_predictions
     path('accounts/', include('allauth.urls')),  # Inclure les URLs de django-allauth
+    path('predict-match/', include('predict_match.urls')),  # Inclure les URLs de l'application predict_match
 
 ]
