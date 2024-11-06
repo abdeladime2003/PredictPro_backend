@@ -15,7 +15,7 @@ class ImageGeneratorAPIView(APIView):
     def post(self, request):
         logger.info("Received request for image generation.")
         prompt = request.data.get("prompt")
-        authorization_token = "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"  # Remplacez par votre token réel
+        authorization_token = "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"  # Remplacez par votre token réel
 
         if authorization_token and prompt and len(prompt) >= 5:
             API_URL = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-2-1"
