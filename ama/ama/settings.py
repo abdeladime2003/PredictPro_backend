@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'predict_match',
+    'generate_image',
 ]
 
 REST_FRAMEWORK = {

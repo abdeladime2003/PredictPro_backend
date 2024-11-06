@@ -10,5 +10,6 @@ urlpatterns = [
     path('transfer-predictions/', include('transfer_predictions.urls')),  # Inclure les URLs de l'application transfer_predictions
     path('accounts/', include('allauth.urls')),  # Inclure les URLs de django-allauth
     path('predict-match/', include('predict_match.urls')),  # Inclure les URLs de l'application predict_match
+    path('generate-image/', include('generate_image.urls')),  # Inclure les URLs de l'application generate_image
 
 ]
