@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',  # if you are using rest_framework.authtoken
     'rest_framework_simplejwt.token_blacklist',
     'transfer_predictions',
-    'django.contrib.sites',  # Required for django-allauth
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
