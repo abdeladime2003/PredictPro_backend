@@ -5,13 +5,15 @@ import pandas as pd
 from rest_framework.permissions import IsAuthenticated
 from .models import Prediction_Match
 # Charger les modèles sauvegardés
-away_model= joblib.load(r'C:\Users\LENOVO\Desktop\backend\ama\ml_model\away_model.joblib')
-home_model = joblib.load(r'C:\Users\LENOVO\Desktop\backend\ama\ml_model\home_model.joblib')
+away_model= joblib.load(r'C:\Users\LENOVO\Desktop\backend\ama\predict_match\ml_model\away_model.joblib')
+home_model = joblib.load(r'C:\Users\LENOVO\Desktop\backend\ama\predict_match\ml_model\home_model.joblib')
 
 
 
 # Charger les données historiques
-historical_matches = pd.read_csv(r'C:\Users\LENOVO\Desktop\backend\ama\ml_model\nowdata.csv')
+historical_matches = pd.read_csv(r'C:\Users\LENOVO\Desktop\backend\ama\predict_match\ml_model\df_clean.csv')
+# Affichage des premières lignes
+print(historical_matches.head())
 
 # Vérification des colonnes disponibles
 print(historical_matches.columns)
@@ -23,7 +25,7 @@ if 'goal_difference' not in historical_matches.columns:
 
 # Fonction de prédiction
 def custom_round(value):
-    return max(0, int(value))
+    return max(0, int(value)+1)
 
 def predict_match(home_team, away_team):
     home_team_form = historical_matches[historical_matches['HomeTeam'] == home_team]['goal_difference'].mean()

@@ -16,7 +16,7 @@ class PricePredictionView(views.APIView):
         return Response(predictions_data, status=status.HTTP_200_OK)
     def post(self, request):
         # Charger le modèle
-        model = joblib.load(r'C:\Users\LENOVO\Desktop\backend\model.pkl')
+        model = joblib.load(r'C:\Users\LENOVO\Desktop\backend\ama\transfer_predictions\Ml_Scraping\model.pkl')
 
         # Récupérer les données d'entrée
         input_data = request.data.get('features')  # Assurez-vous que les features sont correctement envoyées

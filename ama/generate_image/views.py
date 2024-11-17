@@ -21,7 +21,7 @@ class ImageGeneratorAPIView(APIView):
         logger.info(f"Prompt received: {prompt}")
         
         # Token d'authentification (à remplacer par un réel token si nécessaire)
-        authorization_token = "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"
+        authorization_token = "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"
         user = request.user if request.user.is_authenticated else None
         logger.info(f"User authenticated: {user is not None}")
         
@@ -93,3 +93,20 @@ class ImageGeneratorAPIView(APIView):
             # Si le prompt ou le token d'authentification sont invalides
             logger.warning("Invalid prompt or authorization token.")
             return Response({"error": "Invalid prompt or authorization token"}, status=status.HTTP_400_BAD_REQUEST)
+    ##get method
+    def get(self, request):
+        # Récupérer les images générées par l'utilisateur authentifié
+        user = request.user if request.user.is_authenticated else None
+        if user:
+            images = GeneratedImage.objects.filter(user=user)
+            data = [
+                {
+                    'prompt': img.prompt,
+                    'image_data': img.image_data,
+                    'created_at': img.created_at
+                } for img in images
+            ]
+            return Response(data, status=status.HTTP_200_OK)
+        else:
+            return Response({"error": "User not authenticated"}, status=status.HTTP_401_UNAUTHORIZED)
+# Compare this snippet from ama/generate_image/urls.py:
