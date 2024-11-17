@@ -1,77 +1,165 @@
-# AMA
 
-## Project Overview
+# Backend - PredictProb
 
-AMA is a web application designed for predicting transfer prices and match results. The name "AMA" stands for the initials of the project owners: Abdeladime, Amine, and Mouad. Our goal is to provide users with accurate predictions based on historical data and advanced algorithms.
+## Description
 
-## Features
+Le backend de **PredictProb** est construit avec **Django** et **Django Rest Framework (DRF)** pour fournir des API robustes et efficaces. Ce backend gère les fonctionnalités principales telles que :
+- La prédiction des résultats de match
+- La prédiction des prix des transferts
+- La génération d'images à partir de descriptions textuelles
 
-- **Transfer Price Prediction**: Utilize historical data and statistical models to predict future transfer prices of players.
-- **Match Result Prediction**: Analyze past match statistics and team performance to forecast the outcomes of upcoming matches.
-- **User-Friendly Interface**: An intuitive design that makes it easy for users to navigate and access predictions.
-- **Real-Time Updates**: Stay informed with real-time updates on player transfers and match results.
+Le projet utilise une base de données SQLite (ou PostgreSQL selon les préférences) pour stocker les données liées aux utilisateurs, aux prédictions et aux générateurs d'images.
 
-## Technology Stack
+## Structure du projet
 
-- **Frontend**: React, TypeScript, Tailwind CSS
-- **Backend**: Django, Django REST Framework
-- **Machine_Learning** : Linearregression , xgboost , Neurol_Network
-- **Database**: PostgreSQL
-- **Version Control**: Git, GitHub
+```
+/
+├── ama/                           # Application principale du projet
+│   ├── __init__.py                 # Initialisation de l'application
+│   ├── models.py                   # Modèles de données
+│   ├── views.py                    # Vues de l'application (API endpoints)
+│   ├── serializers.py              # Sérialiseurs pour les modèles de données
+│   └── urls.py                     # Définition des URLs pour l'application
+├── generated_images/               # Logiciel pour la génération d'images
+│   ├── __init__.py
+│   └── generator.py                # Logique de génération d'images
+├── predict_match/                  # Application pour la prédiction des matchs
+│   ├── __init__.py
+│   └── predictor.py                # Logique de prédiction des résultats de matchs
+├── transfer_predictions/           # Application pour la prédiction des prix des transferts
+│   ├── __init__.py
+│   └── predictor.py                # Logique de prédiction des prix des transferts
+├── users/                          # Gestion des utilisateurs (inscription, connexion)
+│   ├── __init__.py
+│   ├── models.py                   # Modèle utilisateur personnalisé
+│   ├── serializers.py              # Sérialisation de l'utilisateur
+│   ├── views.py                    # Vues pour l'inscription et la gestion des utilisateurs
+│   └── urls.py                     # URLs pour les API utilisateur
+├── db.sqlite3                      # Base de données SQLite
+├── manage.py                       # Commande de gestion de Django
+├── requirements.txt                # Liste des dépendances Python
+└── .env                            # Variables d'environnement (base de données, clés API, etc.)
+```
+
+## Fonctionnalités
+
+### Prédiction des résultats de match
+- L'API prend en entrée les équipes et la date du match pour prédire les résultats.
+- Modèle basé sur des statistiques historiques et des performances des joueurs.
+
+### Prédiction des prix des transferts
+- Prédiction des prix des joueurs en fonction de différents paramètres comme les performances récentes, l'âge, et la popularité.
+
+### Génération d'images
+- API permettant la génération d'images en fonction d'une description textuelle fournie par l'utilisateur.
+
+### Gestion des utilisateurs
+- Inscription et gestion des utilisateurs via des API sécurisées.
+- Utilisation de JWT pour l'authentification.
 
 ## Installation
 
-To set up the project locally, follow these steps:
+### Prérequis
+- **Python 3.x** : Pour exécuter l'application Django.
+- **Virtualenv** : Pour isoler l'environnement Python.
+- **SQLite** (ou PostgreSQL) : Base de données pour le stockage des données.
 
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/yourusername/ama.git](https://github.com/abdeladime2003/Backend_foot.git
-   cd Backend_foot
-   ```
+### Étapes d'installation
 
-2. **Set Up Virtual Environment** (optional but recommended):
-   ```bash
-   python -m venv myenv
-   source myenv/bin/activate  # On Windows use `myenv\Scripts\activate`
-   ```
+1. Clone le repository backend
 
-3. **Install Dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
+```bash
+git clone https://github.com/ton-utilisateur/PredictProb-backend.git
+cd PredictProb-backend
+```
 
-4. **Run the Application**:
-   - Start the backend server:
-     ```bash
-     python manage.py runserver
-     ```
-   - Frontend
-     For those who want to access the frontend of this project, please visit the following repository and follow the instructions:
-     [Frontend Repository](https://github.com/abdeladime2003/Frontend)
+2. Crée un environnement virtuel et active-le
 
-   - For the frontend, navigate to the frontend directory and run:
-     ```bash
-     npm start
-     ```
+```bash
+python -m venv myenv
+source myenv/bin/activate  # Sur Windows : myenv\Scriptsctivate
+```
 
-## Usage
+3. Installe les dépendances
 
-Once the application is running, navigate to `http://localhost:8000` (for backend) and `http://localhost:3000` (for frontend) in your web browser to access the application. Explore the features and see how well our predictions align with actual outcomes!
+```bash
+pip install -r requirements.txt
+```
 
-## Contributing
+4. Configure les variables d'environnement
+- Crée un fichier `.env` à la racine du projet avec les variables nécessaires (comme la base de données, les clés API, etc.).
 
-We welcome contributions to enhance the project. If you'd like to contribute, please fork the repository and submit a pull request. 
+5. Applique les migrations de la base de données
 
-## License
+```bash
+python manage.py migrate
+```
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+6. Démarre le serveur de développement
 
-## Contact
+```bash
+python manage.py runserver
+```
 
-For any inquiries or feedback, please reach out to the project owners:
+Cela démarrera le backend sur [http://localhost:8000](http://localhost:8000).
 
-- **Abdeladime**: [abdeladimebenali2003@gmail.com]
+### Docker (facultatif)
 
----
+Si tu utilises Docker, tu peux démarrer le backend dans un container Docker.
 
-Thank you for checking out our project, and we hope you find it useful!
+```bash
+docker-compose up --build
+```
+
+Cela va démarrer le backend dans un container.
+
+## API Endpoints
+
+### Prédiction des résultats de match
+- **URL** : `/api/predict/match/`
+- **Méthode** : POST
+- **Paramètres** :
+  - `team1`: Nom de l'équipe 1
+  - `team2`: Nom de l'équipe 2
+  - `date`: Date du match
+- **Réponse** : Prédiction du score du match.
+
+### Prédiction des prix des transferts
+- **URL** : `/api/predict/transfer/`
+- **Méthode** : POST
+- **Paramètres** :
+  - `player_name`: Nom du joueur
+  - `current_club`: Club actuel du joueur
+- **Réponse** : Estimation du prix du transfert.
+
+### Génération d'images
+- **URL** : `/api/generate/image/`
+- **Méthode** : POST
+- **Paramètres** :
+  - `description`: Description de l'image (par exemple "joueur de football stylisé")
+- **Réponse** : Image générée selon la description.
+
+### Inscription et Authentification
+- **URL** : `/api/auth/signup/`
+- **Méthode** : POST
+- **Paramètres** :
+  - `username`: Nom d'utilisateur
+  - `email`: Adresse email
+  - `password`: Mot de passe
+- **Réponse** : Confirmation d'inscription.
+
+## Contribuer
+
+1. Fork ce repository.
+2. Crée une branche (`git checkout -b feature/nouvelle-fonctionnalité`).
+3. Fais tes modifications.
+4. Soumets une pull request.
+
+## Auteurs
+
+- **Ton Nom** – Développeur principal
+- **Superviseur ou mentor** – Supervisé par [Nom du superviseur]
+
+## Licence
+
+Ce projet est sous licence [MIT](https://opensource.org/licenses/MIT).
