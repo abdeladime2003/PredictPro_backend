@@ -7,10 +7,7 @@ from sklearn.preprocessing import QuantileTransformer
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 from sklearn.experimental import enable_iterative_imputer
 from sklearn.impute import IterativeImputer
-import warnings
 import pickle
-
-warnings.filterwarnings('ignore')
 
 class XGBoostModelBuilder:
     def __init__(self, random_state=1937):
