@@ -8,7 +8,9 @@ from rest_framework import status
 import base64
 import logging
 from .models import GeneratedImage  # Importez le modèle
-
+import os
+from dotenv import load_dotenv
+load_dotenv()
 # Création d'un logger
 logger = logging.getLogger(__name__)
 
@@ -21,7 +23,8 @@ class ImageGeneratorAPIView(APIView):
         logger.info(f"Prompt received: {prompt}")
         
         # Token d'authentification (à remplacer par un réel token si nécessaire)
-        authorization_token = "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"
+        #from env 
+        authorization_token = os.getenv('HUGGING_FACE_API_KEY')
         user = request.user if request.user.is_authenticated else None
         logger.info(f"User authenticated: {user is not None}")
         
