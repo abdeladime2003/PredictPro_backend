@@ -1,111 +1,118 @@
 
-# Backend - PredictPro
+# Backend_ML - PredictPro  
 
-## Description
+## Description  
 
-Le backend de **PredictPro** est construit avec **Django** et **Django Rest Framework (DRF)** pour fournir des API robustes et efficaces. Ce backend gère les fonctionnalités principales telles que :
-- La prédiction des résultats de match
-- La prédiction des prix des transferts
-- La génération d'images à partir de descriptions textuelles
+Le backend de **PredictPro** est conçu avec **Django** et **Django Rest Framework (DRF)** pour offrir une architecture modulaire et performante.  
+Il fournit des fonctionnalités innovantes pour :  
+- Prédire les résultats de match.  
+- Estimer les prix des transferts de joueurs.  
+- Générer des images à partir de descriptions textuelles.  
 
-Le projet utilise une base de données  PostgreSQL  pour stocker les données liées aux utilisateurs, aux prédictions et aux générateurs d'images.
+Chaque API est associée à des modèles de machine learning dédiés, organisés par fonction pour une gestion claire et efficace. Ces modèles sont optimisés et intégrés dans le backend pour répondre aux besoins spécifiques de chaque fonctionnalité.  
 
+Le projet utilise une base de données **PostgreSQL** pour gérer les données liées aux utilisateurs, aux prédictions et aux générateurs d'images.  
 
+---
 
-## Fonctionnalités
+## Fonctionnalités  
 
-### Prédiction des résultats de match
-- L'API prend en entrée les équipes pour prédire les résultats.
-- Modèle basé sur des statistiques historiques et des performances des équipes.
+### 1. Prédiction des résultats de match  
+- **Description** : Prévoir les scores des matchs en fonction des performances historiques et des données des équipes.  
+- **Modèles ML** : Basés sur des statistiques historiques et des algorithmes de régression.  
 
-### Prédiction des prix des transferts
-- Prédiction des prix des joueurs en fonction de différents paramètres comme les performances récentes, l'âge, et la popularité.
+### 2. Prédiction des prix des transferts  
+- **Description** : Estimer la valeur des joueurs selon divers paramètres comme les performances récentes, l'âge, et la popularité.  
+- **Modèles ML** : Réseaux neuronaux et algorithmes supervisés.  
 
-### Génération d'images
-- API permettant la génération d'images en fonction d'une description textuelle fournie par l'utilisateur.
+### 3. Génération d'images  
+- **Description** : Générer des images personnalisées à partir d'une description textuelle fournie par l'utilisateur.  
+- **Modèles ML** : Modèles de génération d'images (GANs).  
 
-### Gestion des utilisateurs
-- Inscription et gestion des utilisateurs via des API sécurisées.
-- Utilisation de JWT pour l'authentification.
+### 4. Gestion des utilisateurs  
+- **Description** :  
+  - Inscription, connexion et gestion sécurisée des utilisateurs.  
+  - Utilisation de **JWT** pour l'authentification et l'autorisation.  
 
-## Installation
+---
 
-### Prérequis
-- **Python 3.x** : Pour exécuter l'application Django.
-- **Virtualenv** : Pour isoler l'environnement Python.
-- **PostgreSQL**  : Base de données pour le stockage des données.
+## Installation  
 
-### Étapes d'installation
+### Prérequis  
+- **Python 3.x** : Pour exécuter l'application Django.  
+- **Virtualenv** : Pour isoler l'environnement Python.  
+- **PostgreSQL** : Base de données pour le stockage des données.  
 
-1. Clone le repository backend
+### Étapes d'installation  
 
-```bash
-git clone https://github.com/ton-utilisateur/PredictPro_backend.git
-cd PredictProb_backend
-```
+1. **Clonez le repository**  
 
-2. Crée un environnement virtuel et active-le
+   ```bash
+   git clone https://github.com/ton-utilisateur/PredictPro_backend.git
+   cd PredictPro_backend
+   ```  
 
-```bash
-python -m venv myenv
-source myenv/bin/activate  # Sur Windows : myenv\Scriptsctivate
-```
+2. **Créez un environnement virtuel et activez-le**  
 
-3. Installe les dépendances
+   ```bash
+   python -m venv myenv
+   source myenv/bin/activate  # Sur Windows : myenv\Scripts\activate
+   ```  
 
-```bash
-pip install -r requirements.txt
-```
+3. **Installez les dépendances**  
 
-4. Configure les variables d'environnement
-- Crée un fichier `.env` à la racine du projet avec les variables nécessaires (comme la base de données, les clés API, etc.).
+   ```bash
+   pip install -r requirements.txt
+   ```  
 
-5. Applique les migrations de la base de données
+4. **Configurez les variables d'environnement**  
+   - Créez un fichier `.env` à la racine du projet avec les informations nécessaires (base de données, clés API, etc.).  
 
-```bash
-python manage.py migrate
-```
+5. **Appliquez les migrations**  
 
-6. Démarre le serveur de développement
+   ```bash
+   python manage.py migrate
+   ```  
 
-```bash
-python manage.py runserver
-```
+6. **Lancez le serveur de développement**  
 
-Cela démarrera le backend sur [http://localhost:8000](http://localhost:8000).
+   ```bash
+   python manage.py runserver
+   ```  
 
+   Accédez à l'application à [http://localhost:8000](http://localhost:8000).  
 
+---
 
-## API Endpoints
+## API Endpoints  
 
-### Prédiction des résultats de match
-- **Méthode** : POST
-- **Paramètres** :
-  - `team1`: Nom de l'équipe 1
-  - `team2`: Nom de l'équipe 2
-- **Réponse** : Prédiction du score du match.
+### Prédiction des résultats de match  
+- **Méthode** : POST  
+- **Paramètres** :  
+  - `team1` : Nom de l'équipe 1.  
+  - `team2` : Nom de l'équipe 2.  
+- **Réponse** : Prédiction du score.  
 
-### Prédiction des prix des transferts
-- **Méthode** : POST
-- **Paramètres** :
-  - `player_name`: Nom du joueur
-  - `Statistics`: Statistics du joueur
-- **Réponse** : Estimation du prix du transfert.
+### Prédiction des prix des transferts  
+- **Méthode** : POST  
+- **Paramètres** :  
+  - `player_name` : Nom du joueur.  
+  - `statistics` : Statistiques du joueur.  
+- **Réponse** : Estimation du prix.  
 
-### Génération d'images
+### Génération d'images  
+- **Méthode** : POST  
+- **Paramètres** :  
+  - `description` : Description textuelle de l'image (par ex. : "un joueur de football stylisé").  
+- **Réponse** : Image générée.  
 
-- **Méthode** : POST
-- **Paramètres** :
-  - `description`: Description de l'image (par exemple "joueur de football stylisé")
-- **Réponse** : Image générée selon la description.
+### Inscription et authentification  
+- **Méthode** : POST  
+- **Paramètres** :  
+  - `username` : Nom d'utilisateur.  
+  - `email` : Adresse email.  
+  - `password` : Mot de passe.  
 
-### Inscription et Authentification
-
-- **Méthode** : POST
-- **Paramètres** :
-  - `username`: Nom d'utilisateur
-  - `email`: Adresse email
-  - `password`: Mot de passe
 - **Réponse** : Confirmation d'inscription.
 
 ## Contribuer
